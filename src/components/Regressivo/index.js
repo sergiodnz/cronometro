@@ -1,45 +1,47 @@
 import React, { useEffect, useState } from 'react';
 
-const Regressivo = ({ tempo, setTempo }) => {
+const Cronometro = ({segundos}) => {
+    const d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setMilliseconds(0);
+    d.setSeconds(segundos);
+    return d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+}
 
+const Regressivo = ({ tempo }) => {
 
     const [timer, setTimer] = useState();
+    const [segundos, setSegundos] = useState(tempo);
+    const maxSeconds = (24*60*60);
 
     useEffect(() => {
         initInterval(tempo);
-        // eslint-disable-next-line
+        console.log(tempo);
+         // eslint-disable-next-line
     }, [tempo]);
 
 
-    const initInterval = segundos => {
-
+    const initInterval = s => {
+        
         clearInterval(timer);
-        let intervalo = segundos;
+        
+        let intervalo = s>maxSeconds?maxSeconds:s;
+
         const id = setInterval(() => {
             intervalo--;
             if (intervalo >= 0) {
-                setTempo(intervalo);
+                setSegundos(intervalo);
             } 
         }, 1000);
 
         setTimer(id);
-
     }
-
-    const Cronometro = s => {
-        const d = new Date();
-        d.setHours(0);
-        d.setMinutes(0);
-        d.setMilliseconds(0);
-        d.setSeconds(s);
-        return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0') + ':' + String(d.getSeconds()).padStart(2, '0');
-    }
-    
 
 
     return (
         <div>
-            {Cronometro(tempo)}
+            <Cronometro segundos={segundos} />
         </div>
     );
 };

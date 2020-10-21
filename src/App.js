@@ -5,19 +5,13 @@ import { TextField } from '@material-ui/core';
 
 function App() {
 
-  const [tempo,setTempo] = useState(10);
-  const maxSeconds = (24*60*60);
+  const [tempo,setTempo] = useState(0);
 
   const alterarTempo = event => {
         
     if (!isNaN(event.target.value)) {
-      
         const segundos = parseInt(event.target.value);
-        if (segundos<=maxSeconds){
-          setTempo(segundos);
-        } else {
-          setTempo(maxSeconds);
-        }
+        setTempo(segundos);
     } else {
         setTempo(0);
     }
@@ -32,8 +26,8 @@ function App() {
             label="tempo em segundos"
             onChange={e => alterarTempo(e)}
         />
-        <hr />
-        <Regressivo tempo={tempo} setTempo={setTempo} />
+        <div>...</div>
+        <Regressivo tempo={tempo} />
       </header>
     </div>
   );
