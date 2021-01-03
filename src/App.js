@@ -1,34 +1,19 @@
-import React, { useState } from 'react';
-import './App.css';
-import Regressivo from './components/Regressivo';
-import { TextField } from '@material-ui/core';
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Rotas from './components/Rotas';
+import Opcoes from './components/Opcoes';
 
 function App() {
 
-  const [tempo,setTempo] = useState(0);
-
-  const alterarTempo = event => {
-        
-    if (!isNaN(event.target.value)) {
-        const segundos = parseInt(event.target.value);
-        setTempo(segundos);
-    } else {
-        setTempo(0);
-    }
-};
-
   return (
     <div className="App">
-     
-      <header className="App-header">
-      <TextField
-            id="outlined-basic"
-            label="tempo em segundos"
-            onChange={e => alterarTempo(e)}
-        />
-        <div>...</div>
-        <Regressivo tempo={tempo} />
-      </header>
+     <CssBaseline />
+     <BrowserRouter>
+     <Opcoes />
+     <Rotas />
+    </BrowserRouter>
     </div>
   );
 }
